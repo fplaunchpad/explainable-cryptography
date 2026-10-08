@@ -38,8 +38,12 @@ of the stated historical symbolic scope, not computational security.
   changed rendered pixels; those pages were visually checked. Static document
   language, statement snippets and local-link checks pass. The eight independent
   attack, repair and reduction fixture scripts from CI pass.
-- [ ] Verify the migrated Lean 4.33.1 default build and hosted CI. The local build
-  is running; the completed Lean 4.32.0 check applied only to the older snapshot.
+- [x] Verify the migrated Lean 4.33.1 default build. Evidence (machine-checked):
+  `lake build` completed successfully (4561 jobs) on 8 October 2026, with no
+  reported errors or warnings. Local log: `tmp/public-migration/lake-build.log`.
+- [ ] Confirm hosted CI for the migrated snapshot. The
+  [migration run](https://github.com/fplaunchpad/explainable-cryptography/actions/runs/37745404639)
+  is running; local build success is separate evidence.
 
 ## Completed immediate priority: a formal reference PDF
 
