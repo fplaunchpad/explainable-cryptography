@@ -1,0 +1,269 @@
+name: Check development
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      deferred:
+        description: 'Also build/audit deferred execution evidence and its historical catalogue'
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: checks-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+env:
+  PYTHONDONTWRITEBYTECODE: '1'
+
+jobs:
+  case-study:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: leanprover/lean-action@50fcf42d2e460296f1a34b402e990d1b24f8b596 # v1
+        with:
+          auto-config: false
+          build: true
+          test: false
+          lint: false
+          use-mathlib-cache: true
+      - name: Install PDF tools
+        shell: bash
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils ripgrep fonts-dejavu-core
+          curl --fail --location --retry 3 \
+            'https://github.com/tectonic-typesetting/tectonic/releases/download/tectonic%400.16.9/tectonic-0.16.9-x86_64-unknown-linux-musl.tar.gz' \
+            --output "$RUNNER_TEMP/tectonic.tar.gz"
+          echo '60b13a0826ae7ad9ce34b4a2df06bff2cfcfa6dda8a915477c0cbb84e1a4a902  '"$RUNNER_TEMP/tectonic.tar.gz" | sha256sum --check
+          mkdir -p "$RUNNER_TEMP/tectonic-bin"
+          tar -xzf "$RUNNER_TEMP/tectonic.tar.gz" -C "$RUNNER_TEMP/tectonic-bin" tectonic
+          echo "$RUNNER_TEMP/tectonic-bin" >> "$GITHUB_PATH"
+      - name: Audit retained computational theorems
+        run: python3 scripts/audit-helios-computational.py
+      - name: Verify actual default imports against retained roots
+        run: python3 scripts/check_helios_targets.py
+      - name: Audit symbolic claims
+        run: python3 scripts/check_helios_claims.py --build-log tmp/computational-audit/case-study/lake-build.log
+      - name: Run independent attack, repair and reduction fixtures
+        run: |
+          mkdir -p tmp/concrete-helios
+          python3 scripts/check-helios-sigma-fixtures.py
+          python3 scripts/check-helios-nonce-fixtures.py
+          python3 scripts/check-helios-repair-fixtures.py
+          python3 scripts/check-helios-sigma-simulation.py
+          python3 scripts/check-helios-election-oracle.py
+          python3 scripts/check-helios-election-acceptance.py
+          python3 scripts/check-helios-ddh-fair-bits.py
+          python3 scripts/check-helios-secrecy-prototype.py
+      - name: Build and check the mathematical reference
+        run: bash scripts/build-formal-reference.sh --document reference
+      - name: Preserve case-study audit evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: case-study-audits
+          path: |
+            tmp/formal-reference/reference/
+            docs/formal-reference/main.pdf
+            tmp/computational-audit/case-study/
+            tmp/helios-target-split/
+            tmp/concrete-helios/
+          retention-days: 14
+
+  deferred-execution-and-catalogue:
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.deferred }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: leanprover/lean-action@50fcf42d2e460296f1a34b402e990d1b24f8b596 # v1
+        with:
+          auto-config: false
+          build: true
+          test: false
+          lint: false
+          use-mathlib-cache: true
+      - name: Install PDF tools
+        shell: bash
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils ripgrep fonts-dejavu-core
+          curl --fail --location --retry 3 \
+            'https://github.com/tectonic-typesetting/tectonic/releases/download/tectonic%400.16.9/tectonic-0.16.9-x86_64-unknown-linux-musl.tar.gz' \
+            --output "$RUNNER_TEMP/tectonic.tar.gz"
+          echo '60b13a0826ae7ad9ce34b4a2df06bff2cfcfa6dda8a915477c0cbb84e1a4a902  '"$RUNNER_TEMP/tectonic.tar.gz" | sha256sum --check
+          mkdir -p "$RUNNER_TEMP/tectonic-bin"
+          tar -xzf "$RUNNER_TEMP/tectonic.tar.gz" -C "$RUNNER_TEMP/tectonic-bin" tectonic
+          echo "$RUNNER_TEMP/tectonic-bin" >> "$GITHUB_PATH"
+      - name: Build Lean and audit all public computational theorems
+        run: python3 scripts/audit-helios-computational.py --scope full
+      - name: Verify optional target coverage
+        run: python3 scripts/check_helios_targets.py --full
+      - name: Check actual cache dispatcher and fault detection
+        run: python3 scripts/check_cache_dispatch.py
+      - name: Check serialized cache requests and rejection guards
+        run: python3 scripts/check_cache_request_input.py --wrapper
+      - name: Check request polynomial bounds and original request observations
+        run: |
+          python3 scripts/check_cache_request_bounds.py
+          python3 scripts/check_cache_request_prefixes.py
+      - name: Check resident caller entry and return mutations
+        run: python3 scripts/check_cache_caller_entry.py
+      - name: Check actual nonce successor and fault detection
+        run: python3 scripts/check_prime_nonce_successor.py
+      - name: Check nonce modulus preparation and complete sampler
+        run: |
+          python3 scripts/check_nonce_operands.py
+          python3 scripts/check_prime_nonce_sampling.py
+          python3 scripts/check_prime_nonce_pair.py
+      - name: Check executed modular arithmetic and fault detection
+        run: |
+          python3 scripts/check_mod_add.py
+          python3 scripts/check_mod_multiply.py
+          python3 scripts/check_mod_power.py
+          python3 scripts/check_prime_encrypt.py
+      - name: Check raw constructor initialization and first ciphertext
+        run: |
+          python3 scripts/check_prime_honest_input_kernel.py
+          python3 scripts/check_prime_honest_ciphertext_kernel.py
+      - name: Check programmed transcript draws and raw caller mutations
+        run: |
+          python3 scripts/check_prime_honest_transcript_native.py
+          python3 scripts/check_prime_transcript_draws_native.py
+          python3 scripts/check_prime_honest_transcript_caller_native.py
+      - name: Check first simulated commitment and raw caller mutations
+        run: |
+          python3 scripts/check_scalar_complement.py
+          python3 scripts/check_prime_sim_commit.py
+          python3 scripts/check_prime_sim_commit_caller.py
+      - name: Check second simulated commitment and raw pair mutations
+        run: |
+          python3 scripts/check_prime_sim_commit_second.py
+          python3 scripts/check_prime_sim_commit_pair_caller.py
+      - name: Check challenge difference and remaining simulator commitments
+        run: |
+          python3 scripts/check_modular_difference.py
+          python3 scripts/check_scalar_difference.py
+          python3 scripts/check_prime_sim_difference_caller.py
+          python3 scripts/check_adjusted_beta.py
+          python3 scripts/check_sim_one_first.py
+          python3 scripts/check_sim_one_second.py
+      - name: Check executed simulator key serialization
+        run: |
+          python3 scripts/check_nat_field_writer.py
+          python3 scripts/check_prime_sim_key.py
+      - name: Check executed programmed-state extraction
+        run: python3 scripts/check_programmed_state_input.py
+      - name: Check programmed cache insertion mutations
+        run: python3 scripts/check_cache_programmed_insert.py
+      - name: Check ordered programmed history mutations
+        run: python3 scripts/check_programmed_history.py
+      - name: Check proof and updated-state encoding mutations
+        run: |
+          python3 scripts/check_bit_pair_writer.py
+          python3 scripts/check_program_output.py
+      - name: Check retained second nonce and fresh transcript draws
+        run: python3 scripts/check_second_transcript.py
+      - name: Check the second proof first commitment and retained state
+        run: python3 scripts/check_second_commit.py
+      - name: Check remaining second-proof commitments and retained state
+        run: |
+          python3 scripts/check_second_commit_b.py
+          python3 scripts/check_second_difference.py
+          python3 scripts/check_second_adjusted.py
+          python3 scripts/check_second_one_first.py
+          python3 scripts/check_second_one_second.py
+      - name: Check the original second-proof key serializer
+        run: python3 scripts/check_second_key.py
+      - name: Check complete reusable proof request and return mutation
+        run: python3 scripts/check_prime_proof_request.py
+      - name: Check actual proof-request reentry and operand-map controls
+        run: python3 scripts/check_proof_request_reentry.py
+      - name: Check distinct p1 and total requests from original raw input
+        run: python3 scripts/check_remaining_proof_caller.py
+      - name: Check generated adaptive native compiler and source mutations
+        run: lake env lean scripts/NativeAdaptiveCompilerGate.lean
+      - name: Check general native query export and head restoration
+        run: lake env lean scripts/NativeQueryExportGate.lean
+      - name: Check general native oracle round trip and continuation mutations
+        run: lake env lean scripts/NativeRoundTripGate.lean
+      - name: Check historical catalogue statements and PDF source
+        run: bash scripts/build-formal-reference.sh --document catalogue
+      - name: Preserve audit logs and rebuilt catalogue
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: lean-audits-and-catalogue
+          path: |
+            tmp/computational-audit/
+            tmp/concrete-helios/DispatchFixtures.lean
+            tmp/concrete-helios/CacheRequestInputNative.lean
+            tmp/concrete-helios/CacheRequestWrapperNative.lean
+            tmp/concrete-helios/CacheRequestBoundsNative.lean
+            tmp/concrete-helios/CacheRequestPrefixesNative.lean
+            tmp/concrete-helios/CacheCallerEntryNative.lean
+            tmp/concrete-helios/PrimeNonceSuccessorNative.lean
+            tmp/concrete-helios/prime-nonce-successor-native*
+            tmp/concrete-helios/NonceOperandsNative.lean
+            tmp/concrete-helios/nonce-operands-native*
+            tmp/concrete-helios/ModAddNative.lean
+            tmp/concrete-helios/mod-add-native*
+            tmp/concrete-helios/ModPowerNative.lean
+            tmp/concrete-helios/mod-power-native*
+            tmp/concrete-helios/PrimeEncryptNative.lean
+            tmp/concrete-helios/prime-encrypt-native*
+            tmp/concrete-helios/ModMultiplyNative.lean
+            tmp/concrete-helios/mod-multiply-native*
+            tmp/concrete-helios/PrimeNoncePairNative.lean
+            tmp/concrete-helios/prime-nonce-pair-native*
+            tmp/concrete-helios/PrimeNonceSamplingNative.lean
+            tmp/concrete-helios/prime-nonce-sampling-native*
+            tmp/concrete-helios/cache-caller-entry-native*
+            tmp/concrete-helios/cache-request-*-native*
+            tmp/concrete-helios/prime-sim-commit*-native*
+            tmp/concrete-helios/modular-difference-native*
+            tmp/concrete-helios/nat-field-writer-*
+            tmp/concrete-helios/scalar-difference-native*
+            tmp/concrete-helios/adjusted-beta-native*
+            tmp/concrete-helios/sim-one-*-native*
+            tmp/concrete-helios/reproduction/
+            tmp/formal-reference/catalogue/
+            docs/formal-reference/catalogue.pdf
+          retention-days: 14
+
+  deferred-independent-controls:
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.deferred }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Run independent Helios fixture campaigns
+        shell: bash
+        run: |
+          mkdir -p tmp/concrete-helios tmp/ci-fixtures
+          failed=0
+          for script in scripts/check-helios-*.py; do
+            echo "Running $script"
+            if ! python3 "$script" > "tmp/ci-fixtures/$(basename "$script" .py).log" 2>&1; then
+              cat "tmp/ci-fixtures/$(basename "$script" .py).log"
+              failed=1
+            fi
+          done
+          exit "$failed"
+      - name: Preserve fixture evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: independent-controls
+          path: |
+            tmp/ci-fixtures/
+            tmp/concrete-helios/
+          retention-days: 14

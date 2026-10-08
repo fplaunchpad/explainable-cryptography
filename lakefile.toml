@@ -5,7 +5,17 @@ defaultTargets = ["ExplainableCrypto"]
 [[require]]
 name = "mathlib"
 scope = "leanprover-community"
-rev = "v4.32.0"
+rev = "v4.33.1"
+
+[[require]]
+name = "VCVio"
+git = "https://github.com/Verified-zkEVM/VCVio.git"
+rev = "6d5c7d502ad97f676293a84c3d364c518cbde117"
 
 [[lean_lib]]
 name = "ExplainableCrypto"
+
+# Full computational development; intentionally absent from defaultTargets.
+[[lean_lib]]
+name = "HeliosExecution"
+roots = ["ExplainableCrypto.Helios.Execution"]

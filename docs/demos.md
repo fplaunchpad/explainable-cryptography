@@ -1,7 +1,7 @@
 # Lean mutation-testing demonstrations
 
 The `ExplainableCrypto/` directory contains literate, executable introductions to mutation coverage
-for specifications. They can be explored independently.
+for specifications. They do not require the research proposal to understand.
 
 Set up the pinned Lean and Mathlib dependencies, then build all demonstrations from the
 repository root:

@@ -37,6 +37,16 @@ The agreed order is:
 2. Specify a concrete cryptographic variant and its proof assumptions first,
    then model the additional attacks and prove the chosen variant's security.
 
-The first phase focuses on the historical symbolic explanation.
+The first phase follows the proposal's historical explanation most directly.
 The second phase needs a precise protocol choice; adding a nonidentity test on our own
 would not establish that it is a sufficient or faithful repair.
+
+
+## Subsequent concrete repair implementation
+
+Section 4 of the canonical task list now implements the BPW strong-Fiat–Shamir
+and explicit/implicit-ciphertext-weeding variant. See the
+[concrete model](helios-computational-model.md) for its source mapping, checked
+copying rejection and honest correctness, and remaining all-PPT obligations.
+This does not reinterpret `(1,1)` as outside the historical domain or change the
+completed symbolic equations. It selects a subsequent concrete repair.

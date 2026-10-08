@@ -7,3 +7,12 @@
 [submodule "external/CatCrypt-core"]
 	path = external/CatCrypt-core
 	url = https://github.com/spitters/CatCrypt-core.git
+[submodule "external/CSLib"]
+	path = external/CSLib
+	url = https://github.com/leanprover/cslib.git
+[submodule "external/SymbolicCryptographyLean"]
+	path = external/SymbolicCryptographyLean
+	url = https://github.com/ravst/SymbolicCryptographyLean.git
+[submodule "external/Isabelle-AFP"]
+	path = external/Isabelle-AFP
+	url = https://github.com/isabelle-prover/mirror-afp-devel.git

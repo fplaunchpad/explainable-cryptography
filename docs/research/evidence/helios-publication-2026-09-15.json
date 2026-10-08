@@ -1,0 +1,93 @@
+{
+  "date": "2026-09-15",
+  "base_commit": "a04c7cbbd7c518d0df0ff2932007d98d46e5a5ac",
+  "proof_position": "3/3 complete under explicit external-efficiency and strict-PPT interpretation boundary",
+  "endpoint": "ExplainableCrypto.Helios.Computational.ElectionSecurityFamily.Family.ballot_secrecy",
+  "source_sha256": {
+    "docs/formal-reference/main.tex": "c0054a439c03136f76ca607f74f7533986574199020eaee5c77682c772d31f14",
+    "docs/formal-reference/main.pdf": "9029a4974b7690dfd68a32c03ebbee5d2d784b5b41375f573e36222494f846e2",
+    "ExplainableCrypto/Helios/Computational/ElectionSecurityFamily.lean": "8d45a6c4951533393bc05f01e71998758d28268b60776eb9c2b151be02d97520",
+    "ExplainableCrypto/Helios/Computational/ReductionEfficiency.lean": "e538a02d3bd551b69d9991e949120797ab2594e940da665e1f4af9012dd11a46",
+    "docs/research/helios-computational-closing-audit.md": "33ae9bea6cb26dcc69cfdf1f3316c2853dbfb668f048fe8857e0a48646b4fa19",
+    "docs/research/helios-scope-comparison.md": "c03b042789af15bdb6f0e1d7b7a145caeb1111f68fd470b825e52286fd5e8dd5",
+    "docs/research/helios-development-experience.md": "7e2dcfafe71962f6f995e983b15bdbaf8005978e727bc272b09cd8567820236a",
+    "docs/formal-reference/statements/Family.lean": "6075f2ee72a4618c5edce4983c8e6ff0ff98355bb4870f7d9e0663199cea2bf4",
+    "docs/formal-reference/statements/BallotSecrecy.lean": "ae16dd097179aba00d5ac5a1bc2ad6df00efaa60b7ef43fadbebb66daf6501a7",
+    "docs/formal-reference/statements/Context.lean": "b6e7570958abde8d7abb0fc981c7e78aabae68b5cb1018676ff33a03d7aa0fbb",
+    "ExplainableCrypto/Helios/Computational/ElectionPublicBounds.lean": "a6c5de8db75a10f880233ae1efe9c69ce85e2d20a5d096cf1a55fa304041ac27"
+  },
+  "local_log_sha256": {
+    "tmp/formal-reference/lake-build.log": "5c913f908be9a69f6855f7e793f3aa932a1353c640d4a1615c4a0629411aa4b8",
+    "tmp/computational-audit/summary.json": "96e33a363a8784e328859b49ce2599dcdb5eb99171f943878b13cc635f1bb3f1",
+    "tmp/helios-publication-2026-09-15/final-claims.log": "0e48604ec2f70cb84f78b8c7ca9c764c3ba66842bc07029eccc03408007b7f56",
+    "tmp/helios-publication-2026-09-15/final-reference.log": "5a5806967d2f84053374f7ad10714966c1f241f33581fe266de9e7d12db2a5f9",
+    "tmp/helios-publication-2026-09-15/final-controls.log": "b95b5805bef96b568b1b2424b637003cd6f306e6312d682e4f2e4e23f635b26a",
+    "tmp/formal-reference/pdf-build.log": "37ce98a6832f310c4f94dc92611f09805f3484963c2d908d81b4e8f1952a8256",
+    "tmp/helios-publication-2026-09-15/final-pipeline.log": "ecf67bf094ab7a619765b7286720bd559c70c1632358f6d2e7ef2d1a86d7a8d0",
+    "tmp/helios-publication-2026-09-15/whitespace-build.log": "b814e4584bc705e3b88f95c52888e81f95f071afee0a02ef693e09402e51a45e"
+  },
+  "checks": {
+    "root_lake_build": "clean pass",
+    "computational_axiom_audit": {
+      "public_theorems": 3193,
+      "exact_name_coverage": true,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "symbolic_claim_audit": "pass",
+    "printed_declarations_and_typed_statements": "pass",
+    "verbatim_statement_and_negative_gate_controls": "pass",
+    "pdf_diagnostics": "no overflow, missing glyphs, errors or unresolved references; underfull spacing visually inspected",
+    "complete_publication_pipeline": "bash scripts/build-formal-reference.sh passed end-to-end after final fixes",
+    "final_source_normalization": "Removed one trailing space in newly published ElectionPublicBounds; root lake build passes after this whitespace-only edit. No mathematical statement or PDF changed."
+  },
+  "visual_review": {
+    "pages": 194,
+    "all_page_layout_review": true,
+    "method": "All rendered contact sheets viewed across root and three existing agents; no automatic image approval",
+    "full_size_pages": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      93,
+      193
+    ],
+    "final_changed_pages_rereviewed": [
+      3,
+      9,
+      10,
+      24,
+      26,
+      27,
+      28
+    ],
+    "limitation": "Contact-sheet inspection of old pages checks layout, not a new semantic or symbol-by-symbol audit."
+  },
+  "preservation": {
+    "existing_proof_changes": [
+      "ExplainableCrypto/Helios/Computational.lean"
+    ],
+    "all_other_existing_proofs_and_root_pins_unchanged": true,
+    "tm_cleanup": "none; checked code preserved in root build"
+  },
+  "external_boundary": [
+    "Every Family field and four theorem hypotheses remain load-bearing.",
+    "E1 strict-PPT resource membership and E2 exact normalized machine efficiency are external mathematical arguments.",
+    "Kernel axioms audit does not validate these external arguments, model adequacy, a concrete asymptotic group family or symbolic/computational correspondence."
+  ],
+  "publication": "This manifest belongs to the publication commit; remote verification is reported after push, without a self-referential commit hash."
+}

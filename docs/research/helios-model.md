@@ -1,9 +1,17 @@
 # Helios replay experiment
 
-Status: specified and implemented; attacks and controls are machine-checked
-(see [results](helios-results.md)). This specification was written before the
-Lean implementation. It does not specify a complete implementation of Helios
-or assume that the proposed repair satisfies ballot privacy.
+Status: this initial finite-handle experiment and its attack controls are
+machine-checked (see [results](helios-results.md)). Its restricted recipe language
+is distinct from the completed historical symbolic theorem, whose B1–B10 endpoint
+is `scopedVoterElection_ballot_secrecy`. The separate computational milestones are
+now **3/3 complete under the revised boundary**, with external uniform-efficiency
+justification and checked encoded-attacker coverage; the publication package is complete. The [scope comparison](helios-scope-comparison.md) identifies the
+protocol, attacker and observation differences. No symbolic-to-computational
+correspondence is claimed, and TM cleanup is outside this publication task.
+
+This specification was written before the finite Lean implementation. It does
+not specify a complete implementation of Helios or establish repair secrecy
+from blocked finite attacks.
 
 ## Enquiry
 
@@ -101,12 +109,15 @@ Alice's vector under replay, its swapped vector under permutation, and `(1,0)`
 under ordinary fresh voting. Fresh Y gives `(1,2)` in both worlds; fresh
 abstention gives `(1,1)`. These provide controls against a constant tally.
 
-## Residual research decisions
+## Boundary of the finite experiment
 
-The full symbolic theorem requires the paper's term equations, arbitrary
-adversarial recipes and transition equivalence. The computational theorem
-requires cryptographic proofs, randomness, collision bounds, efficient
-adversaries, bounded tally decoding and explicit assumptions. Neither follows
-from the finite model. The concrete repair's domain condition has an
+The completed symbolic theorem uses the historical term equations, arbitrary
+public recipes and source transition equivalence. The computational result uses
+concrete proof transcripts, random-oracle semantics, collision/replay bounds,
+explicit efficiency and DDH hypotheses, and bounded tally decoding. Neither
+result follows from this finite model. Their separate declarations and remaining
+cross-model obligations are recorded in the [scope comparison](helios-scope-comparison.md).
+The historical concrete repair's domain condition still has an
 [unresolved source discrepancy](helios-repair-ambiguity.md); no exclusion of
-`(1,1)` is silently added here.
+`(1,1)` is silently added here. The selected computational repair instead has
+its explicit statement-binding and expanded-weeding predicates.

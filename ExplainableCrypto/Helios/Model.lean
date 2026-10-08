@@ -12,10 +12,14 @@ ballots. This model establishes attack witnesses, not general ballot secrecy.
 namespace ExplainableCrypto.Helios
 
 inductive Voter | alice | bob | mallory
-  deriving DecidableEq, Repr, Fintype
+  deriving DecidableEq, Repr
+
+instance : Fintype Voter := ⟨{.alice, .bob, .mallory}, by intro value; cases value <;> simp⟩
 
 inductive Vote | x | y | abstain
-  deriving DecidableEq, Repr, Fintype
+  deriving DecidableEq, Repr
+
+instance : Fintype Vote := ⟨{.x, .y, .abstain}, by intro value; cases value <;> simp⟩
 
 /-- Allocation names for opaque ciphertexts. `position = false` names the
 original X component; no plaintext or cryptographic randomness is stored here. -/
@@ -59,7 +63,9 @@ def sharesCiphertext (a b : Ballot) : Bool :=
   a.y.ciphertext == b.x.ciphertext || a.y.ciphertext == b.y.ciphertext
 
 inductive Policy | original | wholeBallot | components
-  deriving DecidableEq, Repr, Fintype
+  deriving DecidableEq, Repr
+
+instance : Fintype Policy := ⟨{.original, .wholeBallot, .components}, by intro value; cases value <;> simp⟩
 
 inductive Rejection | invalidProof | duplicateBallot | reusedCiphertext
   deriving DecidableEq, Repr

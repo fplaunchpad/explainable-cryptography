@@ -1,0 +1,86 @@
+{
+  "measured_at_utc": "2026-09-15T14:24:41.618972+00:00",
+  "base_commit": "a04c7cbbd7c518d0df0ff2932007d98d46e5a5ac",
+  "base_commit_time": "2026-09-15T15:32:39+05:30",
+  "method": "Sorted recursive *.lean files under each named directory. Physical lines = len(bytes.splitlines()), including comments, blank lines, controls and Audit.lean. Aggregator siblings outside the directories excluded. Manifest SHA-256 hashes concatenated relative path + NUL + file-content SHA-256 + newline. History uses git log --reverse --format=%H%x09%cI%x09%s BASE -- PATH (not --follow).",
+  "limitations": [
+    "Physical lines are not theorem counts or minimal proof size.",
+    "Path history does not follow predecessor names or measure active work.",
+    "Working-tree snapshot includes unpublished files; its hashes, not future live counts, define this measurement.",
+    "Scopes overlap neither one another nor include dependencies/scripts/docs."
+  ],
+  "scopes": {
+    "Symbolic": {
+      "path": "ExplainableCrypto/Helios/Symbolic/",
+      "committed": {
+        "files": 861,
+        "physical_lines": 87550,
+        "bytes": 5168907,
+        "audit_lean_lines": 12318,
+        "physical_lines_excluding_audit_lean": 75232,
+        "path_content_manifest_sha256": "2f11372f3fbcdfbacc892408f4f83af6b9ca1ff269dd08741dd32c5185928ac9"
+      },
+      "working_tree": {
+        "files": 861,
+        "physical_lines": 87550,
+        "bytes": 5168907,
+        "audit_lean_lines": 12318,
+        "physical_lines_excluding_audit_lean": 75232,
+        "path_content_manifest_sha256": "2f11372f3fbcdfbacc892408f4f83af6b9ca1ff269dd08741dd32c5185928ac9"
+      },
+      "earliest_path_commit": "e2cb839defc967b3d56aa814e7a4800b51a7cede\t2026-09-10T18:13:51+05:30\tAdd Helios formalisation and reproducible research workflow",
+      "latest_path_commit": "d428fbd08dd6412702e818c64aafdadee57bf8a0\t2026-09-14T11:02:05+05:30\tAdd concrete Helios attack, repair and finite secrecy reduction"
+    },
+    "Computational": {
+      "path": "ExplainableCrypto/Helios/Computational/",
+      "committed": {
+        "files": 568,
+        "physical_lines": 79687,
+        "bytes": 4418650,
+        "audit_lean_lines": 0,
+        "physical_lines_excluding_audit_lean": 79687,
+        "path_content_manifest_sha256": "bf9464e3c4323fdb566f98b298a2a59d49534b53298f577a576ed92b09317399"
+      },
+      "working_tree": {
+        "files": 582,
+        "physical_lines": 82060,
+        "bytes": 4536514,
+        "audit_lean_lines": 0,
+        "physical_lines_excluding_audit_lean": 82060,
+        "path_content_manifest_sha256": "bd8083e10da2398a2a7be8e6f1492ee3eb4b5ea0e59d27d2c8d50311d5155558"
+      },
+      "earliest_path_commit": "d428fbd08dd6412702e818c64aafdadee57bf8a0\t2026-09-14T11:02:05+05:30\tAdd concrete Helios attack, repair and finite secrecy reduction",
+      "latest_path_commit": "a04c7cbbd7c518d0df0ff2932007d98d46e5a5ac\t2026-09-15T15:32:39+05:30\tProve general native oracle round trip and batch research publication"
+    }
+  },
+  "pins": {
+    "root_vcvio": "6d5c7d502ad97f676293a84c3d364c518cbde117",
+    "root_polyfun": "c0c923693fc827a41d17116579a0c16ed4873b19",
+    "scratch_vcvio": "25f26bfee60d6700644eb1a69f091091948f15da",
+    "scratch_polyfun": "2348446013d72990237232444e656955f85f97c9"
+  },
+  "recorded_budget": {
+    "path": "tmp/handler-substitution-2026-09-15/selected-pin.txt",
+    "text": "VCVio 25f26bfee60d6700644eb1a69f091091948f15da\nwindow 2026-09-15 11:55:23\u201313:25:23 UTC\n",
+    "interpretation": "Scheduled 90-minute window, not measured active work or completion duration."
+  },
+  "finite_reduction_publication_snapshot": {
+    "commit": "d428fbd08dd6412702e818c64aafdadee57bf8a0",
+    "path": "ExplainableCrypto/Helios/Computational/",
+    "files": 277,
+    "physical_lines": 38923,
+    "bytes": 2012349,
+    "path_content_manifest_sha256": "266bcf8967b5b801e53eb0e61406bb376773267652754abb74fe96e11eaadc82",
+    "scope_warning": "Whole computational directory at the attack/repair/finite-reduction publication, including controls and other support; not a dependency slice of the finite theorem."
+  },
+  "inspected_evidence_sha256": {
+    "external/VCVio/VCVioComplexity/VCVioComplexity/Backend/TuringMachine.lean": "f37b034aae11c1c0f60d85cfde87c62b5aaf3b84fe04c7e6c6914d4f9ef34ab9",
+    "tmp/handler-substitution-2026-09-15/Scratch/SubstitutionCandidate.lean": "2e609128a1bd42ce07d4be00ca73d4941bd398af2901e813d2500b8d88b86263",
+    "tmp/handler-substitution-2026-09-15/Scratch/SubstitutionRestriction.lean": "c4a57d709505501ac1e733447593d2a90d8c801f5ab957e3d3be5cad6e3e875f",
+    "tmp/handler-substitution-2026-09-15/logs/substitution-final3.log": "54dd68bf8ca7d7944b3ac965b577683d582ac9bbdde5083ac8e64e0a23da2f30",
+    "tmp/handler-substitution-2026-09-15/logs/audit-result.json": "ca239689b7c60793c790bd5e846551c6751fcb18546505b8266d32e7bf7861bb",
+    "tmp/handler-substitution-2026-09-15/logs/preservation.json": "f64265953b7c9dd4f19161930d477f1beaed023a7bebca5415b1e2a324b98737",
+    "tmp/handler-substitution-2026-09-15/selected-pin.txt": "c61e67a5f3b6c836a0514d64785a2ed69d0b90d220d59ac33f5d6c023679b636",
+    "tmp/handler-substitution-2026-09-15/.lake/packages/PolyFun/PolyFun/Realizability/Quantitative/Iteration.lean": "8bae14b525e06ae33dcd4be9ab9e0b118b57f93ed6121284821654a7b1936502"
+  }
+}

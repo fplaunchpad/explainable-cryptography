@@ -1,8 +1,8 @@
 import ExplainableCrypto.Helios.Symbolic.ReductionClosure
 
 /-! A termination-to-confluence argument for this relation. All global results
-retain `LocalConfluentModulo` as an explicit hypothesis: its Helios-specific
-proof is still outstanding, not supplied as an axiom. -/
+retain `LocalConfluentModulo` as an explicit hypothesis. `GlobalConfluence.lean`
+supplies its Helios-specific proof by simultaneous structural induction. -/
 namespace ExplainableCrypto.Helios.Symbolic
 variable {V : Type}
 

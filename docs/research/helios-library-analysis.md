@@ -2,7 +2,7 @@
 
 Source review, 10 September 2026. Recommendation: retain Mathlib for the first symbolic attack model; use VCVio as the leading candidate for subsequent computational proofs. CatCrypt-core is a credible alternative, particularly for stateful package proofs and its existing Chaum–Pedersen development. LeanDY would require substantial foundational extensions for this particular privacy property.
 
-This assessment concerns the pinned revisions, not every branch or historical version. It is a source and dependency review, not a successful build or kernel-level proof audit. None of the three pinned toolchains is currently installed locally. This project's Lean/Mathlib version is 4.32.0.
+This assessment concerns the pinned revisions, not every branch or historical version. It is a source and dependency review, not a successful build or kernel-level proof audit. None of the three pinned toolchains is currently installed locally. The proposal's Lean/Mathlib version is 4.32.0.
 
 | Library | Revision | Lean | Direct mathematical/framework dependencies |
 | --- | --- | --- | --- |
@@ -22,7 +22,7 @@ There are three distinct deliverables:
 | A faithful port of the paper's positive theorem | Symbolic terms modulo homomorphic equations, adversary recipes, static equivalence, transition matching | Custom symbolic layer; none of these supplies the theorem directly |
 | Computational privacy under cryptographic assumptions | Probabilistic games, adaptive adversaries, proof simulation/extraction, advantage bounds and efficiency | VCVio or CatCrypt-core |
 
-A computational game proof is not automatically a port of the applied-pi theorem. Likewise, a finite tally example is not a proof of general privacy. These claims must remain distinct in the documentation and implementation.
+A computational game proof is not automatically a port of the applied-pi theorem. Likewise, a finite tally example is not a proof of general privacy. These claims must remain distinct in the proposal and implementation.
 
 **2. LeanDY: useful security infrastructure, but a poor direct fit for ballot privacy.**
 

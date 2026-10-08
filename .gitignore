@@ -4,7 +4,7 @@ _references/
 # Lean build artifacts and downloaded dependencies.
 .lake/
 
-# Generated documents, renderings, and intermediate files.
+# Generated proposal documents, renderings, and intermediate files.
 output/
 tmp/
 

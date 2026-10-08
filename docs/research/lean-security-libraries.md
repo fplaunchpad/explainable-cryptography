@@ -8,7 +8,7 @@ Downloaded and inspected on 2026-09-10. These are source checkouts, not installe
 | VCVio | https://github.com/Verified-zkEVM/VCVio | 6d5c7d502ad97f676293a84c3d364c518cbde117 | 4.33.1 |
 | CatCrypt-core | https://github.com/spitters/CatCrypt-core | 91410d23b34a886fcc35765d59a93565906bbe17 | 4.30.0 |
 
-This repository uses Lean/Mathlib 4.32.0. None of these checkouts shares that exact toolchain.
+The proposal repository currently uses Lean/Mathlib 4.32.0. None of these checkouts shares that exact toolchain.
 
 ## Fit for Helios
 
