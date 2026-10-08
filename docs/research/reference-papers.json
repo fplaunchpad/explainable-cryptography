@@ -1,0 +1,17 @@
+[
+  {
+    "file": "adida-2008-helios.pdf",
+    "url": "https://www.usenix.org/legacy/events/sec08/tech/full_papers/adida/adida.pdf",
+    "sha256": "677b318b809d2ecee36c0d60036cd1ab8b74a7dbcbeb3618324ca9864d033218"
+  },
+  {
+    "file": "cortier-smyth-2013-attacking-and-fixing-helios.pdf",
+    "url": "https://publications.bensmyth.com/files/Smyth12-attacking-Helios.JCS.pdf",
+    "sha256": "6b67240ab7e27ec41ac80a399a5f4f3c852931441a52bd09f3e1ff80629a7546"
+  },
+  {
+    "file": "smyth-2012-replay-attacks-helios.pdf",
+    "url": "https://publications.bensmyth.com/files/Smyth12a-attacking-Helios.pdf",
+    "sha256": "d5414045209ce204f97a7d46c80db2750fb22fb5e3d4ff3b9a82700e753f3182"
+  }
+]

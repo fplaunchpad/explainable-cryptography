@@ -1,0 +1,51 @@
+import ExplainableCrypto.Helios.SPOT
+
+/-! Public declarations and their kernel-reported dependencies. -/
+#check ExplainableCrypto.Helios.replay_accepted
+#print axioms ExplainableCrypto.Helios.replay_accepted
+#check ExplainableCrypto.Helios.replay_tallies
+#print axioms ExplainableCrypto.Helios.replay_tallies
+#check ExplainableCrypto.Helios.replay_distinguishes
+#print axioms ExplainableCrypto.Helios.replay_distinguishes
+#check ExplainableCrypto.Helios.original_not_private
+#print axioms ExplainableCrypto.Helios.original_not_private
+#check ExplainableCrypto.Helios.swap_preserves_validity
+#print axioms ExplainableCrypto.Helios.swap_preserves_validity
+#check ExplainableCrypto.Helios.permuted_ballot_distinct
+#print axioms ExplainableCrypto.Helios.permuted_ballot_distinct
+#check ExplainableCrypto.Helios.permutation_accepted
+#print axioms ExplainableCrypto.Helios.permutation_accepted
+#check ExplainableCrypto.Helios.permutation_tallies
+#print axioms ExplainableCrypto.Helios.permutation_tallies
+#check ExplainableCrypto.Helios.permutation_distinguishes
+#print axioms ExplainableCrypto.Helios.permutation_distinguishes
+#check ExplainableCrypto.Helios.wholeBallot_not_private
+#print axioms ExplainableCrypto.Helios.wholeBallot_not_private
+#check ExplainableCrypto.Helios.issued_valid
+#print axioms ExplainableCrypto.Helios.issued_valid
+#check ExplainableCrypto.Helios.ordinary_tallies
+#print axioms ExplainableCrypto.Helios.ordinary_tallies
+#check ExplainableCrypto.Helios.ordinary_not_rejected
+#print axioms ExplainableCrypto.Helios.ordinary_not_rejected
+#check ExplainableCrypto.Helios.tally_not_constant
+#print axioms ExplainableCrypto.Helios.tally_not_constant
+#check ExplainableCrypto.Helios.fresh_abstention_tallied
+#print axioms ExplainableCrypto.Helios.fresh_abstention_tallied
+#check ExplainableCrypto.Helios.malformed_rejected
+#print axioms ExplainableCrypto.Helios.malformed_rejected
+#check ExplainableCrypto.Helios.malformed_not_tallied
+#print axioms ExplainableCrypto.Helios.malformed_not_tallied
+#check ExplainableCrypto.Helios.wholeBallot_blocks_replay
+#print axioms ExplainableCrypto.Helios.wholeBallot_blocks_replay
+#check ExplainableCrypto.Helios.components_block_replay
+#print axioms ExplainableCrypto.Helios.components_block_replay
+#check ExplainableCrypto.Helios.components_block_permutation
+#print axioms ExplainableCrypto.Helios.components_block_permutation
+#check ExplainableCrypto.Helios.component_rejection_not_invalid_proof
+#print axioms ExplainableCrypto.Helios.component_rejection_not_invalid_proof
+#check ExplainableCrypto.Helios.issued_aggregate_at_most_one
+#print axioms ExplainableCrypto.Helios.issued_aggregate_at_most_one
+#check ExplainableCrypto.Helios.fresh_ballots_accepted
+#print axioms ExplainableCrypto.Helios.fresh_ballots_accepted
+#check ExplainableCrypto.Helios.recipe_swap_validity
+#print axioms ExplainableCrypto.Helios.recipe_swap_validity

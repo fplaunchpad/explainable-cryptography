@@ -1,0 +1,12 @@
+# Research materials: papers, PDFs, notes, scraped pages. Local only.
+_references/
+
+# Lean build artifacts and downloaded dependencies.
+.lake/
+
+# Generated documents, renderings, and intermediate files.
+output/
+tmp/
+
+# Local editor and operating-system files.
+.DS_Store

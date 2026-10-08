@@ -1,0 +1,9 @@
+[submodule "external/LeanDY"]
+	path = external/LeanDY
+	url = https://github.com/SecPriv/leandy.git
+[submodule "external/VCVio"]
+	path = external/VCVio
+	url = https://github.com/Verified-zkEVM/VCVio.git
+[submodule "external/CatCrypt-core"]
+	path = external/CatCrypt-core
+	url = https://github.com/spitters/CatCrypt-core.git
