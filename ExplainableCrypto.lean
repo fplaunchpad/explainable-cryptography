@@ -72,6 +72,9 @@ import ExplainableCrypto.Helios.Symbolic.ExpandedKeyExperiments
 import ExplainableCrypto.MutationTesting
 import ExplainableCrypto.OneTimePad.MutationTesting
 import ExplainableCrypto.OneTimePad.Visuals
+import ExplainableCrypto.KatzLindell.Basic
+import ExplainableCrypto.KatzLindell.PerfectSecrecy
+import ExplainableCrypto.KatzLindell.Examples
 import ExplainableCrypto.Helios.SPOT
 import ExplainableCrypto.Helios.Experiments
 import ExplainableCrypto.Helios.Audit

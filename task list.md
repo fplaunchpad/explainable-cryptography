@@ -5428,6 +5428,19 @@ adapted obligation for our equations, observations and rejection behavior.
   formative misconception collection and response coding inform study design;
   this is literature context, not evidence that our intervention improves learning.
 
+- [x] Add `ExplainableCrypto/KatzLindell/`, formalizing Katz and Lindell's
+  *Introduction to Modern Cryptography* Definition 2.3 (perfect secrecy),
+  Definition 2.6 (perfect indistinguishability via an explicit `PrivKeav`
+  adversarial game), and `perfectSecrecy_iff_perfectlyIndistinguishable`
+  proving their equivalence (Exercise 2.6), plus two sanity-check examples
+  (`leakyBit_not_perfectlyIndistinguishable` as the non-vacuity check).
+  Independent of `ExplainableCrypto.OneTimePad`, which proves perfect secrecy
+  for one concrete finite cipher directly and does not build the
+  indistinguishability game or this equivalence. See
+  [`docs/katz-lindell/`](docs/katz-lindell/README.md) for a natural-language
+  proof writeup and a noted Mathlib gap (no `PMF`-to-`ProbabilityTheory.cond`
+  bridge, which forced the Lean proof to use unconditioned `tsum` arithmetic
+  instead of conditional-probability phrasing) (2026-11-12).
 - [ ] Revisit [mutation automation ideas](docs/mutation-testing-ideas.md): typed
   mutation syntax, witness search and proof-carrying classifications. Derive
   coverage from certificates and keep failed searches unresolved.

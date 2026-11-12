@@ -137,11 +137,13 @@ and place the cursor on a `#html` command to inspect the demonstration tables.
 | `ExplainableCrypto.lean` | Main formalization entry point |
 | `ExplainableCrypto/MutationTesting.lean` | Elementary specification and construction mutations |
 | `ExplainableCrypto/OneTimePad/` | Perfect secrecy, mutations, key-reuse attack and visualizations |
+| `ExplainableCrypto/KatzLindell/` | Katz–Lindell Definitions 2.3/2.6 and their equivalence (Exercise 2.6) via an explicit adversarial indistinguishability game |
 | `ExplainableCrypto/Helios/Symbolic/` | Completed historical symbolic proof and controls |
 | `ExplainableCrypto/Helios/Computational.lean` | Explicit retained computational roots for the default build |
 | `ExplainableCrypto/Helios/Execution.lean` | Optional full computational aggregate (`HeliosExecution`) |
 | `ExplainableCrypto/Helios/Computational/` | Unmoved source files for both targets |
 | `docs/formal-reference/` | Mathematical reference and historical catalogue PDFs, LaTeX, typed checks and claim ledger |
+| `docs/katz-lindell/` | Natural-language proof writeup for `ExplainableCrypto/KatzLindell/` and a noted Mathlib gap |
 | `docs/research/` | Research evidence, model boundaries and dependency blueprint |
 | `task list.md` | Canonical development backlog |
 | `external/` | Pinned reference checkouts; separate from Lake's dependencies |
