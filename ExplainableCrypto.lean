@@ -75,6 +75,8 @@ import ExplainableCrypto.OneTimePad.Visuals
 import ExplainableCrypto.KatzLindell.Basic
 import ExplainableCrypto.KatzLindell.PerfectSecrecy
 import ExplainableCrypto.KatzLindell.Examples
+import ExplainableCrypto.KatzLindell.KeySpaceLowerBound
+import ExplainableCrypto.KatzLindell.ShannonTheorem
 import ExplainableCrypto.Helios.SPOT
 import ExplainableCrypto.Helios.Experiments
 import ExplainableCrypto.Helios.Audit

@@ -28,6 +28,12 @@ structure Adversary (M C : Type) where
 
 variable {M K C : Type}
 
+/-- `S` is correct if decryption always inverts encryption: whenever key
+generation can output `k`, every ciphertext that encrypting `m` under `k`
+can actually produce decrypts back to `m`. -/
+def Correct (S : EncScheme M K C) : Prop :=
+  ∀ k ∈ S.keygen.support, ∀ m : M, ∀ c ∈ (S.encrypt k m).support, S.decrypt k c = m
+
 /-- The adversarial indistinguishability experiment `PrivKeav_{A,S}`,
 as a distribution over its {0,1}-valued outcome. (Named `S` for "scheme"
 since `Π` is reserved by Lean for dependent function types.) -/
