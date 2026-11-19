@@ -73,6 +73,7 @@ end Pigeonhole
 
 variable [Fintype M] [Fintype K] [Fintype C] [DecidableEq C]
 
+omit [DecidableEq C] in
 /-- From a singleton support `{c}`, the whole probability mass sits at `c`. -/
 private theorem eq_one_and_rest_zero_of_singleton_support {p : PMF C} {c : C}
     (h : Finset.univ.filter (fun c' => p c' ≠ 0) = {c}) :
@@ -88,6 +89,7 @@ private theorem eq_one_and_rest_zero_of_singleton_support {p : PMF C} {c : C}
   have hsum : ∑' c', p c' = p c := tsum_eq_single c (fun c' hc' => hzero c' hc')
   rw [← hsum, PMF.tsum_coe]
 
+omit [Fintype M] [Fintype K] [DecidableEq C] in
 /-- A convenience form: given that the support is a singleton, the value at
 any particular point of that support is `1`. -/
 private theorem eq_one_of_mem_support_of_card_eq_one {S : EncScheme M K C} {k : K} {m : M}
@@ -101,12 +103,14 @@ private theorem eq_one_of_mem_support_of_card_eq_one {S : EncScheme M K C} {k : 
   rw [Finset.mem_singleton.mp hmem]
   exact (eq_one_and_rest_zero_of_singleton_support hc').1
 
+omit [Fintype M] [Fintype K] [DecidableEq C] in
 private theorem encrypt_support_filter_nonempty (S : EncScheme M K C) (k : K) (m : M) :
     (Finset.univ.filter (fun c => S.encrypt k m c ≠ 0)).Nonempty := by
   classical
   obtain ⟨c, hc⟩ := (S.encrypt k m).support_nonempty
   exact ⟨c, Finset.mem_filter.mpr ⟨Finset.mem_univ c, ((S.encrypt k m).mem_support_iff c).mp hc⟩⟩
 
+omit [Fintype M] [Fintype K] [DecidableEq C] in
 /-- For a *live* key under a correct scheme, encryptions of distinct
 messages can never land on the same ciphertext (else decryption would be
 ambiguous). -/
@@ -125,6 +129,7 @@ private theorem Correct.encrypt_pairwise_disjoint {S : EncScheme M K C} (hCorrec
     hCorrect k hk m₂ c (((S.encrypt k m₂).mem_support_iff c).mpr (Finset.mem_filter.mp hc₂).2)
   exact hm (h1.symm.trans h2)
 
+omit [Fintype K] in
 /-- The key structural fact behind the forward direction: for a live key `k`
 under a correct scheme with `|M| = |C|`, encryption is deterministic for
 every message. This is exactly the WLOG claim the book's proof assumes. -/
@@ -135,6 +140,7 @@ private theorem Correct.singleton_support_of_card_eq {S : EncScheme M K C}
   (pairwise_disjoint_card_eq_one_and_cover (Correct.encrypt_pairwise_disjoint hCorrect hk)
     (fun m' => encrypt_support_filter_nonempty S k m') hMC).1 m
 
+omit [Fintype M] [Fintype K] [DecidableEq C] in
 /-- For a fixed message, distinct keys satisfying the uniqueness condition
 can never both produce the same ciphertext. -/
 private theorem UniqueKeyPerCiphertext.encrypt_pairwise_disjoint {S : EncScheme M K C}
@@ -153,6 +159,7 @@ private theorem UniqueKeyPerCiphertext.encrypt_pairwise_disjoint {S : EncScheme 
     hk' k₂ (((S.encrypt k₂ m).mem_support_iff c).mpr (Finset.mem_filter.mp hc₂).2)
   exact hk (e1.trans e2.symm)
 
+omit [Fintype M] in
 /-- The key structural fact behind the backward direction: condition 2
 together with `|K| = |C|` forces encryption to be deterministic too — with
 no `Correct` hypothesis needed at all. -/
@@ -182,6 +189,7 @@ private theorem eq_of_le_of_sum_eq_card_mul {ι : Type*} [Fintype ι] {f : ι �
   rw [hsum, hconst] at hstrict
   exact lt_irrefl _ hstrict
 
+omit [Fintype K] in
 /-- For a fixed live key `k` and ciphertext `c₀`, summing the (singleton)
 ciphertext probability over all messages gives exactly `1`: every ciphertext
 is reached from exactly one message under this key. -/
